@@ -1,0 +1,49 @@
+﻿@model PointOfSales.Models.Bill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Menu.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Menu.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkProfile.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkProfile.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TableNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TableNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

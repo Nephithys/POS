@@ -167,7 +167,7 @@ namespace PointOfSales.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Create", "WorkProfiles");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

@@ -22,11 +22,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Schedule", "Index", "Calendar")</li>
+                    <li>@Html.ActionLink("Schedule", "Index","Calendar")</li>
+                    <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
+                    <li>@Html.ActionLink("Tabel Bills", "Index", "Bills")</li>
                     <li>@Html.ActionLink("Reservations", "Reservations", "Calendar")</li>
-                    <li>@Html.ActionLink("Inventory", "InventoryManagements", "Index")</li>
+                    <li>@Html.ActionLink("Inventory", "Index", "InventoryManagements")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

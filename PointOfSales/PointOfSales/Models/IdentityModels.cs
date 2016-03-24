@@ -35,5 +35,7 @@ namespace PointOfSales.Models
         public System.Data.Entity.DbSet<PointOfSales.Models.WorkProfile> WorkProfiles { get; set; }
 
         public System.Data.Entity.DbSet<PointOfSales.Models.Menu> Menus { get; set; }
+
+        public System.Data.Entity.DbSet<PointOfSales.Models.Bill> Bills { get; set; }
     }
 }
