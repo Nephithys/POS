@@ -15,11 +15,48 @@ namespace PointOfSales.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        
         // GET: Bills
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
+            var UserID = User.Identity.GetUserId();
+            if (search == null || search == "")
+            {
+                var bills2 = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
+                var UserInfo = bills2.Where(userid => userid.UserID == UserID);
+                return View(UserInfo.ToList());
+            }
+            int tableNumber = Int32.Parse(search);
             var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
-            return View(bills.ToList());
+            var userInfo = bills.Where(userid => userid.UserID == UserID);
+            var infoAndTable = userInfo.Where(x => x.TableNumber == tableNumber);
+            displayTotal(billTotal(search));
+            return View(infoAndTable.ToList());
+        }
+
+        public decimal billTotal(string search)
+        {
+            int tableNumber = Int32.Parse(search);
+            var UserID = User.Identity.GetUserId();
+            var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
+            var userInfo = bills.Where(userid => userid.UserID == UserID);
+            var infoAndTable = userInfo.Where(x => x.TableNumber == tableNumber);
+            
+
+            double totalCost = 0;
+            foreach (var itemPrice in infoAndTable)
+            {
+                 totalCost = totalCost + itemPrice.Menu.Price;
+            }
+            decimal roundedTotal = (decimal)totalCost;
+            return roundedTotal;
+        }
+
+        public ActionResult displayTotal(decimal calculatedTotal)
+        {
+            ViewBag.total = calculatedTotal;
+            return View();
         }
 
         // GET: Bills/Details/5
