@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201603241712118_nine.Designer.cs">
       <DependentUpon>201603241712118_nine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603281918462_9.cs" />
+    <Compile Include="Migrations\201603281918462_9.Designer.cs">
+      <DependentUpon>201603281918462_9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bill.cs" />
@@ -309,10 +313,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\120524040801-airport-restaurant-5-horizontal-large-gallery.jpg" />
     <Content Include="Images\53_warning-128.png" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Adventure.png" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\fine-dining-restaurant-720.jpg" />
+    <Content Include="Images\Formal-Dining-Restaurant-POS-System.jpg" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -394,6 +403,8 @@
     <Content Include="Views\Bills\Details.cshtml" />
     <Content Include="Views\Bills\Edit.cshtml" />
     <Content Include="Views\Bills\Index.cshtml" />
+    <Content Include="Views\WorkProfiles\IndexForUsers.cshtml" />
+    <Content Include="Views\Bills\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -446,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603241712118_nine.resx">
       <DependentUpon>201603241712118_nine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603281918462_9.resx">
+      <DependentUpon>201603281918462_9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

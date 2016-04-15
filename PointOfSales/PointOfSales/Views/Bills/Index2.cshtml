@@ -13,8 +13,8 @@
 <p>
     @using (Html.BeginForm("Index", "Bills", FormMethod.Get))
     {
-    <b>Search by Table</b>
-    @Html.TextBox("search") <input type="submit" value="Search"/>
+        <b>Search by Table</b>
+        @Html.TextBox("search") <input type="submit" value="Search" />
     }
 </p>
 <table class="table">
@@ -34,27 +34,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Menu.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Menu.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkProfile.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TableNumber)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkProfile.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TableNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
 
@@ -82,6 +83,6 @@ else
     <a href="@Url.Action("DeleteBill","Bills")"><input type="image" src="~/Images/53_warning-128.png" width="30" height="30" /></a>
 }
 
-    
+
 
 

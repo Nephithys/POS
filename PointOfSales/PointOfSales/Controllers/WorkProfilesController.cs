@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PointOfSales.Models;
 using Microsoft.AspNet.Identity;
+using PointOfSales.Custom_Filters;
 
 namespace PointOfSales.Controllers
 {
@@ -16,12 +17,21 @@ namespace PointOfSales.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: WorkProfiles
+        [AuthLog(Roles = "02Management")]
         public ActionResult Index()
         {
             return View(db.WorkProfiles.ToList());
         }
+        [Authorize]
+        public ActionResult IndexForUsers()
+        {
+            var UserID = User.Identity.GetUserId();
+            var UserInfo = db.WorkProfiles.Where(userid => userid.UserID == UserID);
+            return View(UserInfo.ToList());
+        }
 
         // GET: WorkProfiles/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +47,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: WorkProfiles/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -61,6 +72,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: WorkProfiles/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -92,6 +104,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: WorkProfiles/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

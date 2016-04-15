@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using PointOfSales.Custom_Filters;
 using PointOfSales.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace PointOfSales.Controllers
     {
         ApplicationDbContext context;
 
+        
         public RoleController()
         {
             context = new ApplicationDbContext();
@@ -24,6 +26,8 @@ namespace PointOfSales.Controllers
         /// Get All Roles
         /// </summary>
         /// <returns></returns>
+
+        [AuthLog(Roles = "02Management")]
         public ActionResult Index()
         {
             var Roles = context.Roles.ToList();
@@ -34,6 +38,7 @@ namespace PointOfSales.Controllers
         /// Create  a New role
         /// </summary>
         /// <returns></returns>
+        [AuthLog(Roles = "02Management")]
         public ActionResult Create()
         {
             var Role = new IdentityRole();
@@ -46,6 +51,7 @@ namespace PointOfSales.Controllers
         /// <param name="Role"></param>
         /// <returns></returns>
         [HttpPost]
+
         public ActionResult Create(IdentityRole Role)
         {
             context.Roles.Add(Role);

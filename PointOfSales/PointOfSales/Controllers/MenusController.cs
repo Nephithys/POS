@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PointOfSales.Models;
+using PointOfSales.Custom_Filters;
 
 namespace PointOfSales.Controllers
 {
@@ -15,12 +16,14 @@ namespace PointOfSales.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Menus
+        [AuthLog(Roles = "02Management")]
         public ActionResult Index()
         {
             return View(db.Menus.ToList());
         }
 
         // GET: Menus/Details/5
+        [AuthLog(Roles = "02Management")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: Menus/Create
+        [AuthLog(Roles = "02Management")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +63,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: Menus/Edit/5
+        [AuthLog(Roles = "02Management")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +95,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: Menus/Delete/5
+        [AuthLog(Roles = "02Management")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

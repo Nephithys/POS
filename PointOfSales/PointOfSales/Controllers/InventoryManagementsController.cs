@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PointOfSales.Models;
 using Microsoft.AspNet.Identity;
 using System.Net.Mail;
+using PointOfSales.Custom_Filters;
 
 namespace PointOfSales.Controllers
 {
@@ -17,12 +18,14 @@ namespace PointOfSales.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: InventoryManagements
+        [AuthLog(Roles = "02Management")]
         public ActionResult Index()
         {
             return View(db.InventoryManagements.ToList());
         }
 
         // GET: InventoryManagements/Details/5
+        [AuthLog(Roles = "02Management")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +41,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: InventoryManagements/Create
+        [AuthLog(Roles = "02Management")]
         public ActionResult Create()
         {
             return View();
@@ -45,11 +49,13 @@ namespace PointOfSales.Controllers
 
         public void sendEmail()
         {
-            var UserID = User.Identity.GetUserId();
+            //posterNose();
+        
+           var UserID = User.Identity.GetUserId();
             var UserInfo = db.WorkProfiles.Where(userid => userid.UserID == UserID);
             var Boss = db.WorkProfiles.Select(x => x).Where(y => y.UserID == UserID).FirstOrDefault();
 
-            var message = new MailMessage("xxxdeathstarmlgxxx@gmail.com", Boss.Email);
+            var message = new MailMessage("xxxdeathstarmlgxxx@gmail.com", "Nephithys@gmail.com");
             message.Subject = "Urgent";
             message.Body = "Some items in your inventory are runnin low!";
             SmtpClient mailer = new SmtpClient("smtp.gmail.com", 587);
@@ -58,6 +64,12 @@ namespace PointOfSales.Controllers
             mailer.Send(message);
         }
 
+        public void posterNose()
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer("SParty.wav");
+            player.Play();
+
+        }
         // POST: InventoryManagements/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -76,6 +88,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: InventoryManagements/Edit/5
+        [AuthLog(Roles = "02Management")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,6 +120,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: InventoryManagements/Delete/5
+        [AuthLog(Roles = "02Management")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PointOfSales.Models;
 using Microsoft.AspNet.Identity;
+using PointOfSales.Custom_Filters;
 
 namespace PointOfSales.Controllers
 {
@@ -15,19 +16,22 @@ namespace PointOfSales.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public int TableNumberToStore;
 
-        
         // GET: Bills
+        [Authorize]
         public ActionResult Index(string search)
         {
             var UserID = User.Identity.GetUserId();
-            if (search == null || search == "")
+
+            if (checkForLetters(search) == false)
             {
                 var bills2 = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
                 var UserInfo = bills2.Where(userid => userid.UserID == UserID);
                 return View(UserInfo.ToList());
             }
             int tableNumber = Int32.Parse(search);
+            this.TableNumberToStore = tableNumber;
             var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
             var userInfo = bills.Where(userid => userid.UserID == UserID);
             var infoAndTable = userInfo.Where(x => x.TableNumber == tableNumber);
@@ -35,22 +39,58 @@ namespace PointOfSales.Controllers
             return View(infoAndTable.ToList());
         }
 
+
+        public ActionResult Index2(string search)
+        {
+            var UserID = User.Identity.GetUserId();
+
+            if (checkForLetters(search) == false)
+            {
+                var bills2 = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
+                return View(bills2.ToList());
+            }
+            int tableNumber = Int32.Parse(search);
+            this.TableNumberToStore = tableNumber;
+            var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
+            var infoAndTable = bills.Where(x => x.TableNumber == tableNumber);
+            displayTotal(billTotal(search));
+            return View(infoAndTable.ToList());
+        }
+
+
+
         public decimal billTotal(string search)
         {
             int tableNumber = Int32.Parse(search);
+            this.TableNumberToStore = tableNumber;
             var UserID = User.Identity.GetUserId();
             var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
             var userInfo = bills.Where(userid => userid.UserID == UserID);
             var infoAndTable = userInfo.Where(x => x.TableNumber == tableNumber);
             
 
-            double totalCost = 0;
+            decimal totalCost = 0;
             foreach (var itemPrice in infoAndTable)
             {
                  totalCost = totalCost + itemPrice.Menu.Price;
             }
-            decimal roundedTotal = (decimal)totalCost;
-            return roundedTotal;
+            
+            return totalCost;
+        }
+
+        public ActionResult DeleteBill()
+        {
+
+            var UserID = User.Identity.GetUserId();
+            var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
+            var userInfo = bills.Where(userid => userid.UserID == UserID);
+            var infoAndTable = userInfo.Where(x => x.TableNumber == this.TableNumberToStore);
+
+
+
+            db.Bills.RemoveRange(infoAndTable);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public ActionResult displayTotal(decimal calculatedTotal)
@@ -60,6 +100,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: Bills/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -75,13 +116,23 @@ namespace PointOfSales.Controllers
         }
 
         // GET: Bills/Create
+        [Authorize]
         public ActionResult Create()
         {
-            
-             
+
+            if (User.IsInRole("02Management"))
+            {
+                ViewBag.MenuID = new SelectList(db.Menus.OrderBy(x => x.Name), "ID", "Name");
+
+                ViewBag.WorkProfileID = new SelectList(db.WorkProfiles.OrderBy(x => x.FullName), "ID", "FullName");
+                return View();
+            }
             ViewBag.MenuID = new SelectList(db.Menus.OrderBy(x => x.Name), "ID", "Name");
 
-            ViewBag.WorkProfileID = new SelectList(db.WorkProfiles.OrderBy(x => x.FullName), "ID", "FullName");
+            var UserID = User.Identity.GetUserId();
+            var orderedProfile = db.WorkProfiles.OrderBy(x => x.FullName);
+            
+            ViewBag.WorkProfileID = new SelectList(orderedProfile.Where(userid => userid.UserID == UserID), "ID", "FullName");
             return View();
         }
 
@@ -105,7 +156,15 @@ namespace PointOfSales.Controllers
             return View(bill);
         }
 
+        public bool checkForLetters(string numToCheck)
+        {
+            int numberOut;
+            bool isNumeric = int.TryParse(numToCheck, out numberOut);
+            return isNumeric;
+        }
+
         // GET: Bills/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -141,6 +200,7 @@ namespace PointOfSales.Controllers
         }
 
         // GET: Bills/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -165,6 +225,8 @@ namespace PointOfSales.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
 
         protected override void Dispose(bool disposing)
         {

@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PointOfSales.Models;
+using System.Web.Security;
+using PointOfSales.Custom_Filters;
 
 namespace PointOfSales.Controllers
 {
@@ -139,7 +141,8 @@ namespace PointOfSales.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        
+        [AuthLog(Roles = "02Management")]
         public ActionResult Register()
         {
             ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
@@ -167,7 +170,7 @@ namespace PointOfSales.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Create", "WorkProfiles");
                 }
                 AddErrors(result);
             }
