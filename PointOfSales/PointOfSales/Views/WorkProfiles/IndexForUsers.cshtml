@@ -4,11 +4,11 @@
     ViewBag.Title = "Work Profile";
 }
 
-<h2>Index</h2>
+<h2>Your Profile</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -58,9 +58,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) 
             </td>
         </tr>
     }

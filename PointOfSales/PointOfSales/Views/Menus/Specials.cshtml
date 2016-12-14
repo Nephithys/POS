@@ -1,0 +1,25 @@
+﻿@model IEnumerable<PointOfSales.Models.Menu>
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h2>Specials</h2>
+
+
+ @foreach (var item in Model)
+ {
+     var picture = Url.Content("~/Images/" + Html.DisplayFor(modelItem => item.MenuImage));
+
+<div class="floating-box">
+    <input type="image" src=@picture name="itemName" width="220" height="220" value=@item.Name class="btn btn-default">
+    <figcaption><strong>@item.Name</strong></figcaption>
+    <figcaption><strong>$@item.Price</strong></figcaption>
+    <figcaption><strong>@item.Description</strong></figcaption>
+</div>
+
+}
+
+
+
+

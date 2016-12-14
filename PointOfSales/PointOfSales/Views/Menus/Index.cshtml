@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<PointOfSales.Models.Menu>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu";
 }
 
-<h2>Index</h2>
+<h2>Resturant Menu</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            <h2>    </h2>
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -20,11 +23,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isSpecial)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    var picture = Url.Content("~/Images/" + Html.DisplayFor(modelItem => item.MenuImage));
+    <tr style="background-color:Black;">
+        <td>
+            <img src="@picture" width="120" height="120"/>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -35,8 +45,11 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.isSpecial)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>

@@ -264,6 +264,22 @@
     <Compile Include="Migrations\201603281918462_9.Designer.cs">
       <DependentUpon>201603281918462_9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606010336270_10.cs" />
+    <Compile Include="Migrations\201606010336270_10.Designer.cs">
+      <DependentUpon>201606010336270_10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606212021219_11.cs" />
+    <Compile Include="Migrations\201606212021219_11.Designer.cs">
+      <DependentUpon>201606212021219_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609260129262_ordered_menu_index.cs" />
+    <Compile Include="Migrations\201609260129262_ordered_menu_index.Designer.cs">
+      <DependentUpon>201609260129262_ordered_menu_index.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141812529_12.cs" />
+    <Compile Include="Migrations\201612141812529_12.Designer.cs">
+      <DependentUpon>201612141812529_12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bill.cs" />
@@ -282,6 +298,7 @@
     <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Content\Menus.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -319,9 +336,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Adventure.png" />
+    <Content Include="Images\Child_Kneel.gif" />
+    <Content Include="Images\delete-all-button-blue-hi.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\fine-dining-restaurant-720.jpg" />
     <Content Include="Images\Formal-Dining-Restaurant-POS-System.jpg" />
+    <Content Include="Images\restaurant-1343327_1920.jpg" />
+    <Content Include="Images\restaurant-hd-wallpaper.jpeg" />
+    <Content Include="Images\restaurant_703396.jpg" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -405,6 +427,7 @@
     <Content Include="Views\Bills\Index.cshtml" />
     <Content Include="Views\WorkProfiles\IndexForUsers.cshtml" />
     <Content Include="Views\Bills\Index2.cshtml" />
+    <Content Include="Views\Menus\Specials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -460,6 +483,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603281918462_9.resx">
       <DependentUpon>201603281918462_9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606010336270_10.resx">
+      <DependentUpon>201606010336270_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606212021219_11.resx">
+      <DependentUpon>201606212021219_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609260129262_ordered_menu_index.resx">
+      <DependentUpon>201609260129262_ordered_menu_index.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141812529_12.resx">
+      <DependentUpon>201612141812529_12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

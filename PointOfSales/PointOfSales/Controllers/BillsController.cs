@@ -27,14 +27,14 @@ namespace PointOfSales.Controllers
             if (checkForLetters(search) == false)
             {
                 var bills2 = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
-                var UserInfo = bills2.Where(userid => userid.UserID == UserID);
+                var UserInfo = bills2.Where(userid => userid.UserID == UserID); 
                 return View(UserInfo.ToList());
             }
             int tableNumber = Int32.Parse(search);
             this.TableNumberToStore = tableNumber;
             var bills = db.Bills.Include(b => b.Menu).Include(b => b.WorkProfile);
-            var userInfo = bills.Where(userid => userid.UserID == UserID);
-            var infoAndTable = userInfo.Where(x => x.TableNumber == tableNumber);
+            var userInfo = bills.Where(userid => userid.UserID == UserID); 
+            var infoAndTable = bills.Where(x => x.TableNumber == tableNumber);
             displayTotal(billTotal(search));
             return View(infoAndTable.ToList());
         }

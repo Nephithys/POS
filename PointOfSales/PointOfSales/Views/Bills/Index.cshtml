@@ -7,7 +7,7 @@
 <h2>Table Bills</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Menu Item", "Create")
 </p>
 
 <p>
@@ -49,8 +49,7 @@
             @Html.DisplayFor(modelItem => item.TableNumber)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) | 
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
@@ -62,6 +61,8 @@
 <div>
     <b>Total:</b> @ViewBag.total<br />
 </div>
+
+<h2>      </h2>
 
 @if (ViewBag.total == null)
 { }
@@ -79,8 +80,11 @@ else
         <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
     </form>
 
-    <a href="@Url.Action("DeleteBill","Bills")"><input type="image" src="~/Images/53_warning-128.png" width="30" height="30" /></a>
+    <h2>      </h2>
+
+    <a href="@Url.Action("DeleteBill","Bills")"><input type="image" src="~/Images/delete-all-button-blue-hi.png" width="70" height="30" /></a>
 }
+
 
     
 

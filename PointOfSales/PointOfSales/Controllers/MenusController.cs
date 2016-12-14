@@ -19,7 +19,16 @@ namespace PointOfSales.Controllers
         [AuthLog(Roles = "02Management")]
         public ActionResult Index()
         {
-            return View(db.Menus.ToList());
+            var OrderMenuByName = db.Menus.OrderBy(x => x.Name);
+            return View(OrderMenuByName.ToList());
+        }
+
+        
+        public ActionResult Specials()
+        {
+            var OrderMenuByName = db.Menus.OrderBy(x => x.Name);
+            var ShowSpecialsOnly = OrderMenuByName.Where(x => x.isSpecial == true);
+            return View(ShowSpecialsOnly.ToList());
         }
 
         // GET: Menus/Details/5
@@ -50,10 +59,13 @@ namespace PointOfSales.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Price,Description")] Menu menu)
+        public ActionResult Create([Bind(Include = "ID,Name,Price,Description,isSpecial")] Menu menu, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                string path = Server.MapPath("~/Images/" + file.FileName);
+                file.SaveAs(path);
+                menu.MenuImage = file.FileName;
                 db.Menus.Add(menu);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,7 +95,7 @@ namespace PointOfSales.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Price,Description")] Menu menu)
+        public ActionResult Edit([Bind(Include = "ID,Name,Price,Description,isSpecial")] Menu menu)
         {
             if (ModelState.IsValid)
             {

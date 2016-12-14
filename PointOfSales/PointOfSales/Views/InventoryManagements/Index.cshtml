@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PointOfSales.Models.InventoryManagement>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Inventory";
 }
 
-<h2>Index</h2>
+<h2>Inventory</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Add Inventory", "Create")
 </p>
 <table class="table">
     <tr>
@@ -36,9 +36,8 @@
         </td>
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Update Inventory", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete Item", "Delete", new { id=item.ID })
         </td>
         <td>
             @if (item.Quantity <= 5)

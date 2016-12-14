@@ -4,9 +4,9 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Menu Manegment</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Menus", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -39,6 +39,18 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.isSpecial, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isSpecial)
+                    @Html.ValidationMessageFor(model => model.isSpecial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <input type="file" name="file" id="file" />
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -47,5 +59,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Menu Items", "Index")
 </div>

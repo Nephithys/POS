@@ -4,9 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Delete Menu</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this item?</h3>
 <div>
     <h4>Menu</h4>
     <hr />
@@ -35,6 +35,14 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.isSpecial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isSpecial)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
@@ -42,7 +50,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to Menu Items", "Index")
         </div>
     }
 </div>
